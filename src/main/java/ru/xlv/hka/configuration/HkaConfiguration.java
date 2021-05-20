@@ -14,8 +14,8 @@ public class HkaConfiguration {
     @Bean
     public WebClient hkaWebClient(HkaProperties hkaProperties) {
         return WebClient.builder()
-                .baseUrl(Objects.requireNonNull(hkaProperties.getDomain(),
-                        "Domain is null! Define heroku-keep-alive.domain=<your_domain> to your app properties file."))
+                .baseUrl(String.format("https://%s.herokuapp.com/", Objects.requireNonNull(hkaProperties.getDomain(),
+                        "Domain is null! Define heroku-keep-alive.domain=<your_domain> to your app properties file.")))
                 .build();
     }
 }
