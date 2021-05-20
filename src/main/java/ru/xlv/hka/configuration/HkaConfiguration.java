@@ -13,9 +13,14 @@ public class HkaConfiguration {
 
     @Bean
     public WebClient hkaWebClient(HkaProperties hkaProperties) {
-        return WebClient.builder()
+        final var builder = WebClient.builder()
                 .baseUrl(String.format("https://%s.herokuapp.com/", Objects.requireNonNull(hkaProperties.getDomain(),
-                        "Domain is null! Define heroku-keep-alive.domain=<your_domain> to your app properties file.")))
-                .build();
+                        "Domain is null! Define heroku-keep-alive.domain=<your_domain> in your app properties file.")));
+        hkaProperties.getHeaders().forEach(builder::defaultHeader);
+        if (hkaProperties.getAuthorization().getUsername() != null && hkaProperties.getAuthorization().getPassword() != null) {
+            builder.defaultHeaders(header -> header.setBasicAuth(
+                    hkaProperties.getAuthorization().getUsername(), hkaProperties.getAuthorization().getPassword()));
+        }
+        return builder.build();
     }
 }

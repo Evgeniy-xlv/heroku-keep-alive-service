@@ -1,3 +1,0 @@
-heroku-keep-alive:
-  domain: https://myapp.herokuapp.com/
-  ping-period-cron: "*/10 * * * * ?"
