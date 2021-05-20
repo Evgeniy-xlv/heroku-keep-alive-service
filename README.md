@@ -6,5 +6,6 @@ A service keeps your heroku app full time alive and available.
 
 ## How to use:
 
-* open the main class of your spring application and annotate it by `@EnableScheduling`. 
+* Open the main class of your spring application and annotate it by `@EnableScheduling`. 
   Also, you must modify `@SpringBootApplication` to `@SpringBootApplication(scanBasePackages = "ru.xlv.hka")`
+* Go to your application properties file and define there `heroku-keep-alive.domain=<your heroku application name>`
