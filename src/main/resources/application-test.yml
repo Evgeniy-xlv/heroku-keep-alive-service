@@ -1,3 +1,3 @@
 heroku-keep-alive:
-  domain: https://fallout-craft-model-converter.herokuapp.com/
+  domain: https://myapp.herokuapp.com/
   ping-period-cron: "*/10 * * * * ?"
