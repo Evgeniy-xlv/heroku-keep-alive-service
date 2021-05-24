@@ -1,6 +1,7 @@
 package ru.xlv.hka.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -25,9 +26,9 @@ public class HkaService {
     }
 
     private void doRequest(Map<String, String[]> headers) {
-        final var requestHeadersSpec = webClient.get().uri(properties.getEndpointPath());
+        final WebClient.RequestHeadersSpec<?> requestHeadersSpec = webClient.get().uri(properties.getEndpointPath());
         headers.forEach(requestHeadersSpec::header);
-        final var responseEntity = requestHeadersSpec
+        final ResponseEntity<?> responseEntity = requestHeadersSpec
                 .retrieve()
                 .toBodilessEntity()
                 .block();
